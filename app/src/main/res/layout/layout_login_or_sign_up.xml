@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="10dp"
+        android:text="@string/or"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="0dp"
+        android:layout_height="0.1dp"
+        android:background="@color/grey"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="10dp"
+        android:showDividers="beginning"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_or"
+        app:layout_constraintTop_toTopOf="@+id/tv_or" />
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="0dp"
+        android:layout_height="0.1dp"
+        android:background="@color/grey"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="10dp"
+
+        android:showDividers="beginning"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/tv_or"
+        app:layout_constraintEnd_toStartOf="@+id/tv_or"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_or" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tvLogout"
+        style="@style/AppTheme.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:layout_marginTop="24dp"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:src="@drawable/ic_profile_signup"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogout" />
+
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/AppTheme.Headline1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile"
+        tools:text="Suraj Sambath " />
+
+
+    <TextView
+        android:id="@+id/tvProfileDescription"
+        style="@style/AppTheme.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        tools:text="I am passionate in Android Development" />
+
+
+    <TextView
+        android:id="@+id/tvPostcount"
+        style="@style/AppTheme.Headline1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogout"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tvCountsHint"
+        style="@style/AppTheme.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Counts"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvPostcount"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogout"
+        />
+
+
+    <TextView
+        android:id="@+id/tvEditProfile"
+        style="@style/AppTheme.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:gravity="center"
+        android:background="@drawable/curvecorners"
+        android:padding="5dp"
+        android:text="@string/edit_profile"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/tvPostcount"
+        app:layout_constraintTop_toBottomOf="@+id/tvCountsHint" />
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
