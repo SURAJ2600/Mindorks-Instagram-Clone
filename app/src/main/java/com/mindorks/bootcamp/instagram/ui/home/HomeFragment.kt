@@ -51,13 +51,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 
     override fun setupView(view: View) {
-
-        Intent(Intent.ACTION_PICK)
-            .apply {
-                type = "image/*"
-            }.run {
-                startActivityForResult(this, 0)
-            }
         rvPosts.apply {
             layoutManager = linearLayoutManager
             adapter = postAdapter
