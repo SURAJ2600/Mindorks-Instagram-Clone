@@ -11,6 +11,7 @@ object Endpoints {
     const val PROFILE_INFO = "me"
     const val MY_POSTS = "instagram/post/my"
     const val LOGOUT = "logout"
+    const val UPLOAD_IMAGE = "image"
 
 
 }

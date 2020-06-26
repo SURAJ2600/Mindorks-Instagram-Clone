@@ -36,6 +36,21 @@ object Validator {
             }
         }
 
+
+    fun validateProfileFields(name: String?):List<Validation> =
+        ArrayList<Validation>().apply {
+            when{
+                name.isNullOrBlank()->{
+                    add(Validation(Validation.Field.NAME, Resource.error(R.string.name_field_empty)))
+                }
+                else ->{
+                    add(Validation(Validation.Field.NAME, Resource.success()))
+
+                }
+            }
+
+        }
+
     fun validateSignUpFields(name :String?,email: String?, password: String?): List<Validation> =
         ArrayList<Validation>().apply {
             when{
@@ -70,6 +85,7 @@ data class Validation(val field: Field, val resource: Resource<Int>) {
     enum class Field {
         NAME,
         EMAIL,
-        PASSWORD
+        PASSWORD,
+        BIO
     }
 }

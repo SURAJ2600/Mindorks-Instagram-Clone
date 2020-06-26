@@ -80,6 +80,7 @@ class ProfileViewModel(
         loading.postValue(true)
         compositeDisposable.add(profileRepository.fetchUserProfile(user).flatMap {
             userInformation.postValue(it)
+            userRepository.saveUserNameAndProfilePic(it.name ?: "",it.profilePicUrl ?: "")
             return@flatMap io.reactivex.Single.just(it)
         }
             .doOnError { handleNetworkError(it) }

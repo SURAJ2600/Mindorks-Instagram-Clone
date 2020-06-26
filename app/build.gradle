@@ -99,6 +99,9 @@ dependencies {
     // Debugging
     debugImplementation "com.amitshekhar.android:debug-db:$debug_db_version"
 
+    //Compressor
+    compile 'id.zelory:compressor:1.0.4'
+
     // Local Unit tests
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"

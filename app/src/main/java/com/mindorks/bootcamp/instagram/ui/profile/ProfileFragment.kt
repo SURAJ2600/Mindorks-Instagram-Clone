@@ -1,5 +1,6 @@
 package com.mindorks.bootcamp.instagram.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,11 +11,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.mindorks.bootcamp.instagram.R
 import com.mindorks.bootcamp.instagram.di.component.FragmentComponent
 import com.mindorks.bootcamp.instagram.ui.base.BaseFragment
-import com.mindorks.bootcamp.instagram.ui.login.LoginActivity
+import com.mindorks.bootcamp.instagram.ui.editprofile.EditProfileActivity
 import com.mindorks.bootcamp.instagram.ui.splash.SplashActivity
 import com.mindorks.bootcamp.instagram.utils.common.GlideHelper
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.item_view_post.view.*
 
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
@@ -62,6 +62,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                   val glideRequest = Glide
                       .with(this@ProfileFragment)
                       .load(GlideHelper.getProtectedUrl(url, headers))
+                      .apply(RequestOptions.circleCropTransform())
+                      .apply(RequestOptions.placeholderOf(R.drawable.ic_profile_selected))
 
                   if (placeholderWidth > 0 && placeholderHeight > 0) {
                       val params = ivProfile.layoutParams as ViewGroup.LayoutParams
@@ -72,7 +74,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                           .apply(RequestOptions.overrideOf(placeholderWidth, placeholderHeight))
                           .apply(RequestOptions.placeholderOf(R.drawable.ic_profile_signup))
                   }
-                  glideRequest.into(ivProfile.ivPost)
+                  glideRequest.into(ivProfile)
               }
 
           })
@@ -93,6 +95,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun setupView(view: View) {
         tvLogout.setOnClickListener {
             viewModel.logoutUser()
+        }
+
+        tvEditProfile.setOnClickListener {
+
+            EditProfileActivity.startActivity(activity as Context,tvProfileDescription.text.toString() ?: "")
         }
     }
 

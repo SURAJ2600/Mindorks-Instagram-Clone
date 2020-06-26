@@ -24,6 +24,10 @@ class UserRepository @Inject constructor(
         userPreferences.setUserEmail(user.email)
         userPreferences.setAccessToken(user.accessToken)
     }
+    fun saveUserNameAndProfilePic(name: String,profilePic: String){
+        userPreferences.setUserName(name)
+        userPreferences.setProfilePic(profilePic)
+    }
 
 
 
@@ -41,9 +45,10 @@ class UserRepository @Inject constructor(
         val userName = userPreferences.getUserName()
         val userEmail = userPreferences.getUserEmail()
         val accessToken = userPreferences.getAccessToken()
+        val profilePic =userPreferences.getProfilePic()
 
         return if (userId !== null && userName != null && userEmail != null && accessToken != null)
-            User(userId, userName, userEmail, accessToken)
+            User(userId, userName, userEmail, accessToken,profilePic)
         else
             null
     }
