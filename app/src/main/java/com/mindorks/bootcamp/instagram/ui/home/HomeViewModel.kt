@@ -28,7 +28,9 @@ class HomeViewModel(
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     val mPosts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     private val user = userRepository.getCurrentUser()!!
-
+    val refreshPosts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
+    var firstId: String? = null
+    var lastId: String? = null
 
     init {
         compositeDisposable.add(
@@ -49,6 +51,9 @@ class HomeViewModel(
                 .subscribe(
                     {
                         list.addAll(it)
+                        firstId = list.maxBy { post -> post.createdAt.time }?.id
+                        lastId = list.minBy { post -> post.createdAt.time }?.id
+
                         loading.postValue(false)
                         mPosts.postValue(Resource.success(it))
                     },
@@ -62,9 +67,7 @@ class HomeViewModel(
 
 
    private fun loadMore(){
-        val firstPostId = if(list.isNotEmpty()) list[0].id else null
-        val lastPostId  = if(list.size > 1 ) list[list.size - 1].id else null
-        if(checkInternetConnection()) paginator.onNext(Pair(firstPostId,lastPostId))
+        if(checkInternetConnection()) paginator.onNext(Pair(firstId,lastId))
     }
     fun onLoadMore(){
         if( loading.value !== null && loading.value == false) loadMore()
@@ -75,5 +78,11 @@ class HomeViewModel(
 
     override fun onCreate() {
         loadMore()
+    }
+
+    fun onNewPost(post: Post) {
+        list.add(0,post)
+        refreshPosts.postValue(Resource.success(mutableListOf<Post>().apply { addAll(list) }))
+
     }
 }

@@ -22,7 +22,6 @@ data class ImageResponse(
     val data: ImageData
 ) {
     data class ImageData(
-
         @Expose
         @SerializedName("imageUrl")
         val imageUrl: String

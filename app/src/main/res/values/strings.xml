@@ -49,6 +49,9 @@
     <string name="choose_profile_picture">Choose your profile picture</string>
     <string name="please_try_latter">An error occurred please try again latter</string>
     <string name="saving_profile">Saving Profile Please wait</string>
-
+    <!--photo-->
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="try_again">Please try again</string>
 
 </resources>
