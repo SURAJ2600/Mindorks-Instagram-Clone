@@ -13,6 +13,7 @@ import com.mindorks.bootcamp.instagram.di.ApplicationContext
 import com.mindorks.bootcamp.instagram.di.TempDirectory
 import com.mindorks.bootcamp.instagram.utils.common.FileUtils
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
+import com.mindorks.bootcamp.instagram.utils.network.NetworkHelperImpl
 import com.mindorks.bootcamp.instagram.utils.rx.RxSchedulerProvider
 import com.mindorks.bootcamp.instagram.utils.rx.SchedulerProvider
 import dagger.Module
@@ -76,5 +77,5 @@ class ApplicationModule(private val application: InstagramApplication) {
 
     @Singleton
     @Provides
-    fun provideNetworkHelper(): NetworkHelper = NetworkHelper(application)
+    fun provideNetworkHelper(): NetworkHelper = NetworkHelperImpl(application)
 }

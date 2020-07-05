@@ -26,7 +26,8 @@ import org.mockito.junit.MockitoJUnitRunner
 class LoginViewModelTest {
 
     @get:Rule
-    val rule = InstantTaskExecutorRule()
+    val rule =
+        InstantTaskExecutorRule()
 
     @Mock
     private lateinit var networkHelper: NetworkHelper
@@ -38,17 +39,16 @@ class LoginViewModelTest {
     private lateinit var loggingInObserver: Observer<Boolean>
 
     @Mock
-    private lateinit var launchDummyObserver: Observer<Event<Map<String, String>>>
+    private lateinit var launchMain: Observer<Event<Map<String, String>>>
 
     @Mock
-    private lateinit var messageStringIdObserver: Observer<Resource<Int>>
+    private lateinit var messageStrinIdObserver: Observer<Resource<Int>>
 
     private lateinit var testScheduler: TestScheduler
-
     private lateinit var loginViewModel: LoginViewModel
 
     @Before
-    fun setUp() {
+    fun init() {
         val compositeDisposable = CompositeDisposable()
         testScheduler = TestScheduler()
         val testSchedulerProvider = TestSchedulerProvider(testScheduler)
@@ -58,53 +58,40 @@ class LoginViewModelTest {
             networkHelper,
             userRepository
         )
+
         loginViewModel.loggingIn.observeForever(loggingInObserver)
-        loginViewModel.launchMain.observeForever(launchDummyObserver)
-        loginViewModel.messageStringId.observeForever(messageStringIdObserver)
-    }
+        loginViewModel.launchMain.observeForever(launchMain)
+        loginViewModel.messageStringId.observeForever(messageStrinIdObserver)
 
-    @Test
-    fun givenServerResponse200_whenLogin_shouldLaunchDummyActivity() {
-        val email = "test@gmail.com"
-        val password = "password"
-        val user = User("id", "test", email, "accessToken")
-        loginViewModel.emailField.value = email
-        loginViewModel.passwordField.value = password
-        doReturn(true)
-            .`when`(networkHelper)
-            .isNetworkConnected()
-        doReturn(Single.just(user))
-            .`when`(userRepository)
-            .doUserLogin(email, password)
-        loginViewModel.onLogin()
-        testScheduler.triggerActions()
-        verify(userRepository).saveCurrentUser(user)
-        assert(loginViewModel.loggingIn.value == false)
-        assert(loginViewModel.launchMain.value == Event(hashMapOf<String, String>()))
-        verify(loggingInObserver).onChanged(true)
-        verify(loggingInObserver).onChanged(false)
-        verify(launchDummyObserver).onChanged(Event(hashMapOf()))
-    }
-
-    @Test
-    fun givenNoInternet_whenLogin_shouldShowNetworkError() {
-        val email = "test@gmail.com"
-        val password = "password"
-        loginViewModel.emailField.value = email
-        loginViewModel.passwordField.value = password
-        doReturn(false)
-            .`when`(networkHelper)
-            .isNetworkConnected()
-        loginViewModel.onLogin()
-        assert(loginViewModel.messageStringId.value == Resource.error(R.string.network_connection_error))
-        verify(messageStringIdObserver).onChanged(Resource.error(R.string.network_connection_error))
     }
 
     @After
     fun tearDown() {
         loginViewModel.loggingIn.removeObserver(loggingInObserver)
-        loginViewModel.launchMain.removeObserver(launchDummyObserver)
-        loginViewModel.messageStringId.removeObserver(messageStringIdObserver)
+        loginViewModel.launchMain.removeObserver(launchMain)
+        loginViewModel.messageStringId.removeObserver(messageStrinIdObserver)
     }
+
+    @Test
+    fun givenServerResponse200_whenLogin_shouldLaunchMain() {
+        val email = "suraj260@gmail.com"
+        val password = "123456"
+        val user = User("id", "suraj", email, "acsksus")
+        loginViewModel.emailField.value = email
+        loginViewModel.passwordField.value = password
+        doReturn(true).`when`(networkHelper).isNetworkConnected()
+        doReturn(Single.just(user)).`when`(userRepository).doUserLogin(email, password)
+        loginViewModel.onLogin()
+        testScheduler.triggerActions()
+        verify(userRepository).saveCurrentUser(user)
+        assert(loginViewModel.loggingIn.value == false)
+        assert(loginViewModel.launchMain.value == Event(hashMapOf<String,String>()))
+        verify(loggingInObserver).onChanged(true)
+        verify(loggingInObserver).onChanged(false)
+        verify(launchMain).onChanged(Event(hashMapOf<String,String>()))
+
+    }
+
+
 
 }
