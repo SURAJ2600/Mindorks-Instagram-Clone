@@ -18,6 +18,7 @@ object Validator {
     private const val MIN_PASSWORD_LENGTH = 6
 
     fun validateLoginFields(email: String?, password: String?): List<Validation> =
+
         ArrayList<Validation>().apply {
             when {
                 email.isNullOrBlank() ->
